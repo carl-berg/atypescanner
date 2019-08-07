@@ -11,5 +11,10 @@
     <PackageIconUrl>https://raw.githubusercontent.com/carl-berg/atypescanner/master/icon.png</PackageIconUrl>
     <PackageTags>ATypeScanner</PackageTags>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
   
 </Project>
