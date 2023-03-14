@@ -26,7 +26,7 @@ namespace ATypeScanner
             {
                 foreach (var type in assembly.DefinedTypes)
                 {
-                    if (type.IsGenericType || type.IsInterface)
+                    if (type.IsGenericType || type.IsInterface || type.IsAbstract)
                     {
                         continue;
                     }
@@ -57,7 +57,7 @@ namespace ATypeScanner
             {
                 foreach (var type in assembly.DefinedTypes)
                 {
-                    if (type.IsInterface)
+                    if (type.IsInterface || type.IsAbstract)
                     {
                         continue;
                     }
