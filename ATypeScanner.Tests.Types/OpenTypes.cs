@@ -19,6 +19,16 @@
 
     }
 
+    public class GenericOpenInterfaceImplementation<T> : IOpenInterface<T> where T : AType
+    {
+
+    }
+
+    public class GenericOpenClassImplementation<T> : OpenClass<T> where T : AType
+    {
+
+    }
+
     public class AType
     {
 

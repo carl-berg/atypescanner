@@ -12,12 +12,21 @@ namespace ATypeScanner.Tests
         public void CanResolveOpenInterfaceTypes()
         {
             var scanner = new TypeScanner(typeof(AType).Assembly);
-            var matches = scanner.FindClosingImplementationsOf(typeof(IOpenInterface<>));
+            var matches = scanner.FindClosingImplementationsOf(typeof(IOpenInterface<>)).ToList();
             matches.ShouldNotBeEmpty();
             matches.ShouldContain(p => p.ConcreteType == typeof(OpenInterfaceImplementation));
             matches.ShouldContain(p => p.ConcreteType == typeof(OpenClassImplementation));
             matches.ShouldAllBe(p => p.GenericType == typeof(IOpenInterface<AType>));
-            
+        }
+
+        [Fact]
+        public void CanResolveGenericOpenTypes()
+        {
+            var scanner = new TypeScanner(typeof(AType).Assembly);
+            var matches = scanner.FindOpenImplementationsOf(typeof(IOpenInterface<>)).ToList();
+            matches.ShouldNotBeEmpty();
+            matches.ShouldContain(p => p.ConcreteType == typeof(GenericOpenInterfaceImplementation<>));
+            matches.ShouldContain(p => p.ConcreteType == typeof(GenericOpenClassImplementation<>));
         }
 
         [Fact]
