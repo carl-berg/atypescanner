@@ -49,6 +49,40 @@ namespace ATypeScanner
         }
 
         /// <summary>
+        /// Returns all generic classes that implement <paramref name="openType"/>
+        /// </summary>
+        public IEnumerable<ClosingTypeResult> FindOpenImplementationsOf(Type openType)
+        {
+            foreach (var assembly in _assemblies)
+            {
+                foreach (var type in assembly.DefinedTypes)
+                {
+                    if (type.IsInterface)
+                    {
+                        continue;
+                    }
+                    else if (type.IsGenericType) 
+                    { 
+                        if (openType.IsInterface)
+                        {
+                            foreach (var @interface in type.GetInterfaces())
+                            {
+                                if (@interface.IsGenericType && openType.IsAssignableFrom(@interface.GetGenericTypeDefinition()))
+                                {
+                                    yield return new ClosingTypeResult(@interface, type.AsType());
+                                }
+                            }
+                        }
+                        else if (openType != type && MatchClassType(openType, type) is Type matchingType)
+                        {
+                            yield return new ClosingTypeResult(matchingType, type);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns all classes that implement <typeparamref name="TType"/>
         /// </summary>
         public IEnumerable<Type> FindImplementationsOf<TType>()
