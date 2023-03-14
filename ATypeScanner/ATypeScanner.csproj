@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Copyright>Copyright (c) 2023 Carl Berg</Copyright>
-    <Version>0.2.0</Version>
+    <Version>0.2.0-preview.0</Version>
     <Authors>Carl Berg</Authors>
     <Description>An appeasing light weight type scanner</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
